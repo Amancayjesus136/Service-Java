@@ -29,12 +29,6 @@ public class AlumnoController {
     @PostMapping("/registrar")
     public ResponseEntity<Object> registrarAlumno(@RequestBody Alumno alumno) {
         try {
-            if (alumno.getAlum_nombres() == null || alumno.getAlum_apellidos() == null ||
-                    alumno.getAlum_edad() == null || alumno.getAlum_correo() == null ||
-                    alumno.getAlum_genero() == null) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Faltan campos obligatorios");
-            }
-
             Alumno nuevoAlumno = alumnoService.storeAlumno(alumno);
             return ResponseEntity.status(HttpStatus.CREATED).body("Alumno registrado correctamente: " + nuevoAlumno.getId_alumno());
         } catch (IllegalArgumentException e) {
